@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 
 class Users extends React.Component {
   constructor() {
@@ -34,8 +35,9 @@ class Users extends React.Component {
       </tr>
     ));
   render() {
+    console.log(this.props);
     return (
-      <div className="margin">
+      <div>
         <table className="tabla">
           <thead>
             <tr>
@@ -51,4 +53,8 @@ class Users extends React.Component {
   }
 }
 
-export default Users;
+const mapStateToProps = reducers => {
+  return reducers.user;
+};
+
+export default connect(mapStateToProps, {})(Users);

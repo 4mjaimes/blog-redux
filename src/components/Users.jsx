@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Spinner from "./Spinner";
 import * as userAction from "../actions/userAction";
 
 class Users extends React.Component {
@@ -15,6 +16,8 @@ class Users extends React.Component {
       </tr>
     ));
   render() {
+    if(this.props.loading)
+      return <Spinner />
     return (
       <div>
         <table className="tabla">

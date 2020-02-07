@@ -1,15 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getUsers } from "../actions/userAction";
+import { getPost } from "../actions/postAction";
 
-class Publicaciones extends React.Component {
+class Post extends React.Component {
   componentDidMount() {
-    if (!this.props.users.length) {
+    if (!this.props.user.users.length) {
       this.props.getUsers();
     }
   }
   render() {
-    console.log(this.props);
     return (
       <>
         <h1>Publicaciones de </h1>
@@ -19,12 +19,16 @@ class Publicaciones extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return state.user;
+const mapStateToProps = ({user, post}) => {
+  return {
+    user,
+    post
+  }
 };
 
 const mapDispatchToProps = {
-  getUsers
+  getUsers,
+  getPost
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Publicaciones);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

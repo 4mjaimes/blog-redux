@@ -11,6 +11,7 @@ class Users extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     if (this.props.loading) return <Spinner />;
     if (this.props.error) return <Fatal message={this.props.error} />;
     return (

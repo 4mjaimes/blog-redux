@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_USERS:
-      return { ...state, users: action.payload, loading: false };
+      return { ...state, users: action.payload, loading: false, error: null };
     case LOADING:
       return{...state, loading: true};
     case ERROR:

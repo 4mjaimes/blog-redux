@@ -12,6 +12,7 @@ export const getUsers = () => async dispatch => {
       payload: response.data
     });
   } catch (error) {
+    console.error('Informacion de usuario no disponible');
     dispatch({
       type: ERROR,
       payload: error.message

@@ -1,4 +1,4 @@
-import { GET_BY_ID, LOADING, ERROR } from "../types/postTypes";
+import { UPDATE_POST, LOADING, ERROR, COMMENTS_LOADING, COMMENTS_ERROR, UPDATE_COMMENTS_POST } from "../types/postTypes";
 import { GET_USERS } from "../types/usuariosTypes";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ export const getPostsById = id => async (dispatch, getState) => {
     });
     const currentPosts = [...posts, newObjPost];
 
-    dispatch({ type: GET_BY_ID, payload: currentPosts });
+    dispatch({ type: UPDATE_POST, payload: currentPosts });
 
     const postIndex = currentPosts.length - 1;
     const currentUsers = [...users];
@@ -41,17 +41,43 @@ export const getPostsById = id => async (dispatch, getState) => {
 
 export const openClose = (userId, index) => (dispatch, getState) => {
   const { posts } = getState().post;
-  const newPosts = {
-    ...posts,
-    [userId] : {
-      ...posts[userId],
-      [index] : {
-        ...posts[userId][index],
-        isOpen: !posts[userId][index].isOpen
-      }
-    }
+  const postSelected = posts[userId][index];
+  const updated = {
+    ...postSelected,
+    isOpen: !postSelected.isOpen
   };
-  console.log(posts);
-  console.log(newPosts);
-  // dispatch({ type: GET_BY_ID, payload: Object.values(newPosts) });
+  const postUpdated = [...posts];
+  postUpdated[userId] = [...postUpdated[userId]];
+  postUpdated[userId][index] = updated;
+  // const newPosts = {
+  //   ...posts,
+  //   [userId] : {
+  //     ...posts[userId],
+  //     [index] : {
+  //       ...posts[userId][index],
+  //       isOpen: !posts[userId][index].isOpen
+  //     }
+  //   }
+  // };
+  dispatch({ type: UPDATE_POST, payload: postUpdated});
+};
+
+export const getComments = (userId, index) => async (dispatch, getState) => {
+  dispatch({ type: COMMENTS_LOADING });
+  const { posts } = getState().post;
+  const postSelected = posts[userId][index];
+  try {
+    const response = await axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${postSelected.id}`);
+    const updated = {
+      ...postSelected,
+      comments: response.data
+    };
+    const postUpdated = [...posts];
+    postUpdated[userId] = [...postUpdated[userId]];
+    postUpdated[userId][index] = updated;
+    dispatch({ type: UPDATE_COMMENTS_POST, payload: postUpdated});
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: COMMENTS_ERROR, payload: error });
+  }
 };

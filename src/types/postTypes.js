@@ -1,3 +1,6 @@
-export const GET_BY_ID = 'POST_GET_BY_ID';
+export const UPDATE_POST = 'POST_UPDATE';
+export const UPDATE_COMMENTS_POST = 'POST_COMMENTS_UPDATE';
 export const LOADING = 'POST_LOADING';
 export const ERROR = 'POST_ERROR';
+export const COMMENTS_LOADING = 'POST_COMMENTS_LOADING';
+export const COMMENTS_ERROR = 'POST_COMMENTS_ERROR';

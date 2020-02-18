@@ -1,5 +1,5 @@
 import { UPDATE_POST, LOADING, ERROR, COMMENTS_LOADING, COMMENTS_ERROR, UPDATE_COMMENTS_POST } from "../types/postTypes";
-import { GET_USERS } from "../types/usuariosTypes";
+import { GET_USERS } from "../types/userTypes";
 import axios from "axios";
 
 export const getPostsById = id => async (dispatch, getState) => {

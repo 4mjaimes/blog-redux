@@ -34,3 +34,9 @@ body{
 .post_Title{
   border-top: 1px solid black;
 }
+
+.task__container{
+  font-size: 20px;
+  margin-left: 50px;
+  margin-bottom: 70px;
+}

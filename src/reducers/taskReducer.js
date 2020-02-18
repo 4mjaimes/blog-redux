@@ -1,14 +1,14 @@
-import { GET_USERS, LOADING, ERROR } from "../types/userTypes";
+import { GET_TASKS, LOADING, ERROR } from "../types/taskTypes";
 const INITIAL_STATE = {
-  users: [],
+  tasks: {},
   loading: false,
   error: null
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case GET_USERS:
-      return { ...state, users: action.payload, loading: false, error: null };
+    case GET_TASKS:
+      return { ...state, tasks: action.payload, loading: false, error: null };
     case LOADING:
       return{...state, loading: true};
     case ERROR:

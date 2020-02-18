@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_USERS, LOADING, ERROR } from "../types/usuariosTypes";
+import { GET_USERS, LOADING, ERROR } from "../types/userTypes";
 
 export const getUsers = () => async dispatch => {
   dispatch({ type: LOADING })
